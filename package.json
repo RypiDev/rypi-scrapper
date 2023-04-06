@@ -1,0 +1,50 @@
+{
+  "name": "@rypidev/rypi-scrapper",
+  "private": true,
+  "license": "MIT",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@fontsource/press-start-2p": "^4.5.11",
+    "@tauri-apps/api": "^1.2.0",
+    "classnames": "^2.3.2",
+    "fast-xml-parser": "4.1.3",
+    "framer-motion": "^10.10.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-feather": "^2.0.10"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.2.2",
+    "@types/node": "^18.7.10",
+    "@types/react": "^18.0.15",
+    "@types/react-dom": "^18.0.6",
+    "@vitejs/plugin-react": "^3.0.0",
+    "@walidoux/eslint-config": "1.0.3",
+    "@walidoux/prettier-config": "1.0.2",
+    "autoprefixer": "10.4.14",
+    "eslint": "8.36.0",
+    "postcss": "8.4.21",
+    "prettier": "2.8.7",
+    "prettier-plugin-tailwindcss": "0.2.6",
+    "tailwindcss": "3.3.1",
+    "typescript": "^4.7.4",
+    "vite": "^4.0.0"
+  },
+  "prettier": "@walidoux/prettier-config",
+  "eslintConfig": {
+    "extends": [
+      "@walidoux/eslint-config"
+    ],
+    "ignorePatterns": [
+      "**/*.config.js",
+      "**/*.config.ts"
+    ]
+  }
+}

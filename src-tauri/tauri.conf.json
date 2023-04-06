@@ -1,0 +1,78 @@
+{
+  "build": {
+    "beforeDevCommand": "yarn dev",
+    "beforeBuildCommand": "yarn build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
+  "package": {
+    "productName": "rypi-scrapper",
+    "version": "0.0.0"
+  },
+  "tauri": {
+    "allowlist": {
+      "window": {
+        "close": true,
+        "minimize": true,
+        "maximize": true,
+        "unmaximize": true
+      },
+      "os": {
+        "all": false
+      },
+      "fs": {
+        "createDir": true,
+        "exists": true,
+        "readDir": true,
+        "writeFile": true,
+        "scope": ["$DOWNLOAD/**/*"]
+      },
+      "shell": {
+        "all": true,
+        "execute": true,
+        "sidecar": true,
+        "open": true,
+        "scope": [
+          {
+            "name": "download-habbo-downloader",
+            "cmd": "npm",
+            "args": ["install", "-g", "habbo-downloader"]
+          }
+        ]
+      },
+      "http": {
+        "all": true,
+        "request": true,
+        "scope": ["https://www.habbo.*/*", "https://images.habbo.*/*"]
+      }
+    },
+    "bundle": {
+      "active": true,
+      "icon": [
+        "icons/32x32.png",
+        "icons/128x128.png",
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
+      ],
+      "identifier": "com.tauri.dev",
+      "targets": "all"
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "decorations": false,
+        "center": true,
+        "resizable": true,
+        "width": 800,
+        "height": 500
+      }
+    ]
+  }
+}
