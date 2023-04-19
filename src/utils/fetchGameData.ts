@@ -3,7 +3,7 @@ import { XMLParser } from 'fast-xml-parser'
 
 import { GAME_ENDPOINTS, client } from '../config/ENDPOINTS'
 import type { DomainTypes } from '../types/Domain'
-import { convertXML } from '../mapping'
+import { convertTXT, convertXML } from '../mapping'
 import { parseData } from './parseData'
 
 export const fetchGameData = async (
@@ -17,18 +17,23 @@ export const fetchGameData = async (
         await client
           .get(endpoint.src, { responseType: ResponseType.Text })
           .then(async ({ data }) => {
+            const currentData = data as string
+
             switch (endpoint.convert) {
               case 'XML':
                 const convertedData = new XMLParser({
                   ignoreAttributes: false,
                   attributeNamePrefix: ''
-                }).parse(data as string)
+                }).parse(currentData)
 
                 const XML2JSON = convertXML(convertedData, endpoint.src)
 
-                console.log(XML2JSON)
-
                 return await parseData(endpoint.fileName, XML2JSON)
+              case 'TXT':
+                return await convertTXT(currentData)
+
+              default:
+                return await parseData(endpoint.fileName, currentData)
             }
           })
           .catch((error) => {
