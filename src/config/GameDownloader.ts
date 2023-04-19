@@ -2,7 +2,7 @@ import type { IDownloaderContent } from '../components'
 
 export const GameDataDownloader: IDownloaderContent = {
   title: 'Converts and bundles:',
-  features: ['XML/TXT to minified JSON files', 'Converts SWF files to JSV']
+  features: ['XML/TXT to minified JSON files', 'Converts SWF files to Parquet']
 }
 
 export const GameAssetsDownloader: IDownloaderContent = {
@@ -12,6 +12,6 @@ export const GameAssetsDownloader: IDownloaderContent = {
     'Album + Recepetion images',
     'Catalogue + Furni icons',
     'Habbo Web Promo + Articles',
-    'MP3 Sounds machine'
+    'MP3 Sounds'
   ]
 }

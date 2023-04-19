@@ -24,14 +24,14 @@ await client
     return (PROD_VERSION = (data as string).match(PROD_VERSION_REGEX)?.[0])
   })
 
-export const GAME_ENDPOINTS: GameEndPointsTypes = (domain) => {
+export const GAME_ENDPOINTS = (domain: DomainTypes): GameEndPointsTypes => {
   return [
     {
       src: `${HABBO_URL(domain)}/gamedata/figuredata/0`,
       convert: 'XML',
       fileName: 'FigureData'
-    }
-    /* {
+    },
+    {
       src: `${HABBO_IMAGES}/figuremap.xml`,
       convert: 'XML',
       fileName: 'FigureMap'
@@ -50,10 +50,10 @@ export const GAME_ENDPOINTS: GameEndPointsTypes = (domain) => {
       fileName: 'EffectMap'
     },
     {
-      src: `${HABBO_URL(domain)}/gamedata/external_variables/0`,
+      src: `${HABBO_URL(domain)}/gamedata/external_flash_texts/0`,
       convert: 'TXT',
       fileName: 'ExternalTexts'
-    } */
+    }
   ]
 }
 
