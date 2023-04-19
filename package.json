@@ -3,11 +3,12 @@
   "private": true,
   "license": "MIT",
   "version": "0.0.0",
-  "description": "",
+  "description": "Scrapping Habbo game data and assets",
   "scripts": {
+    "tauri": "tauri",
     "dev": "vite",
     "build": "tsc && vite build",
-    "build:types": "tsc -t es2022 -m es2022 --moduleResolution node --outDir build --declaration --emitDeclarationOnly src/generateTypes.ts"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@fontsource/press-start-2p": "^4.5.11",
