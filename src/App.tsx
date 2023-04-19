@@ -8,9 +8,9 @@ import {
 } from './config/GameDownloader'
 
 const Main: React.FC = () => {
-  const [error, setError] = useState('')
-  const [response, setResponse] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [_error, setError] = useState('')
+  const [_response, setResponse] = useState('')
+  const [_loading, setLoading] = useState(false)
 
   const callback = (message: string, error = false): void => {
     if (error) return setError(message)
