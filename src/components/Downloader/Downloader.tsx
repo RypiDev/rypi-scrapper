@@ -40,7 +40,7 @@ export const Downloader: React.FC<DownloaderProps> = ({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { staggerChildren: 0.5 } }}
             exit={{ opacity: 0 }}
-            className='pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/70 pb-5 text-[12px] text-white'>
+            className='pointer-events-none text-center absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/70 pb-5 text-[12px] text-white'>
             <motion.h1
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
