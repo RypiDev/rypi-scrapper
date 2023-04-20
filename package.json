@@ -27,7 +27,7 @@
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^3.0.0",
     "@walidoux/eslint-config": "1.0.3",
-    "@walidoux/prettier-config": "1.0.2",
+    "@walidoux/prettier-config": "1.0.3",
     "autoprefixer": "10.4.14",
     "eslint": "8.36.0",
     "postcss": "8.4.21",
