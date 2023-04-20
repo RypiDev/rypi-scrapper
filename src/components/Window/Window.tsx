@@ -11,7 +11,7 @@ export const Window: React.FC<WindowProps> = ({ children }) => {
     <Fragment>
       <TitleBar />
 
-      <main className='flex h-screen w-screen flex-col items-center justify-center overflow-hidden bg-[#242424] p-10'>
+      <main className='flex items-center justify-center py-20 h-full w-screen flex-col bg-[#242424]'>
         {children}
       </main>
     </Fragment>
