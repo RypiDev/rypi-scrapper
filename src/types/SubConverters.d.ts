@@ -2,35 +2,35 @@ export interface IFurni {
   id: number
   classname: string
   revision: number
-  category: string
+  category?: string
   defaultdir: number
   xdim: number
   ydim: number
-  partcolors: { color: string[] }
-  name: string
-  description: string
-  adurl: string
-  offerid: number
+  partcolors?: { color: string[] }
+  name?: string
+  description?: string
+  adurl?: string
+  offerid?: number
   buyout: boolean
   rentofferid: number
   rentbuyout: boolean
   bc: boolean
   excludeddynamic: boolean
-  customparams: string
+  customparams?: string
   specialtype: number
   canstandon: boolean
   cansiton: boolean
   canlayon: boolean
-  furniline: string
-  environment: string
+  furniline?: string
+  environment?: string
   rare: boolean
 }
 
 export interface IFigureDataColor {
   id: number
   index: number
-  club: number // must be changed, either 0, 1, 2
-  selectable: boolean
+  club: number // must be changed to something, either 0, 1, 2
+  selectable: boolean // has been changed to boolean, can be either 1, 0
   hexCode: string
 }
 
@@ -41,35 +41,31 @@ export interface IFigureDataPalette {
 
 export interface IFigureDataPart {
   id: number
-  type: string // must be changed
-  colorable: boolean // must be changed
+  type: string // must be changed (i guess)
+  colorable: boolean // has been changed to boolean, can be either 1, 0
   index: number
   colorindex: number
 }
 
-export interface IFigureDataHiddenLayer {
-  partType: string // must be changed
-}
-
 export interface IFigureDataSet {
   id: number
-  gender: 'M' | 'F' | 'U'
-  club: number // 0, 1, 2
-  colorable: boolean // must be changed
-  selectable: boolean // must be changed
-  preselectable: boolean // must be changed
-  sellable?: boolean // must be changed
+  gender: 'M' | 'F' | 'U' // has been changed
+  club: number // must be changed to something, either 0, 1, 2
+  colorable: boolean // has been changed to boolean, can be either 1, 0
+  selectable: boolean // has been changed to boolean, can be either 1, 0
+  preselectable: boolean // has been changed to boolean, can be either 1, 0
+  sellable?: boolean // has been changed to boolean, can be either 1, 0, null
   parts: IFigureDataPart[]
-  hiddenLayers?: IFigureDataHiddenLayer[]
+  hiddenLayers: Array<{ partType: string }> // !! can be empty
 }
 
 export interface IFigureDataSetType {
-  type: string // must be changed
+  type: string // must be changed (i guess)
   paletteId: number
-  mandatoryF0: boolean // 0, 1
-  mandatoryF1: boolean // 0, 1
-  mandatoryM0: boolean // 0, 1
-  mandatoryM1: boolean // 0, 1
+  mandatoryF0: boolean // has been changed to boolean, can be either 1, 0
+  mandatoryF1: boolean // has been changed to boolean, can be either 1, 0
+  mandatoryM0: boolean // has been changed to boolean, can be either 1, 0
+  mandatoryM1: boolean // has been changed to boolean, can be either 1, 0
   sets: IFigureDataSet[]
 }
 
@@ -87,7 +83,7 @@ export interface IFigureMapLibrary {
 export interface IEffectMapLibrary {
   id: number
   lib: string
-  type: string
+  type: string // dance || fx
   revision: number
 }
 
