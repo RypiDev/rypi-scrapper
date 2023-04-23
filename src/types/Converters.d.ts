@@ -17,8 +17,8 @@ export interface IFigureMap {
 }
 
 export interface IFurniData {
-  roomitemtypes: { furnitype: IFurni }
-  wallitemtypes: { furnitype: IFurni }
+  roomItemTypes: IFurni[]
+  wallItemTypes: IFurni[]
 }
 
 export interface IEffectMap {
