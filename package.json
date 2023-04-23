@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "version": "0.0.0",
-  "description": "Scrapping Habbo game data and assets",
+  "description": "Scrapping Habbo gamedata and assets",
   "scripts": {
     "tauri": "tauri",
     "dev": "vite",
