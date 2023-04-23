@@ -1,10 +1,16 @@
+import { Convertion } from '../config/Convertion'
+import { parseData } from '../tools/parseData'
 import type { IFigureMap, IFigureMapLibrary, IXML } from '../types'
 
 export class FigureMap {
   public data: IFigureMap = { libraries: [] }
 
-  constructor(XML: IXML) {
+  constructor(XML: IXML, fileName: string) {
     this.parseLibrairies(XML.map.lib)
+
+    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
+      return console.error(error)
+    })
   }
 
   private parseLibrairies(librairies: any[]): void {

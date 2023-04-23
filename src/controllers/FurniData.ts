@@ -1,11 +1,17 @@
+import { parseData } from '../tools/parseData'
 import type { IFurni, IFurniData, IXML, KeyValuePairs } from '../types'
+import { Convertion } from '../config/Convertion'
 
 export class FurniData {
   public data: IFurniData = { roomItemTypes: [], wallItemTypes: [] }
 
-  constructor(data: IXML) {
+  constructor(data: IXML, fileName: string) {
     this.parseRoomItemTypes(data.roomitemtypes.furnitype)
     this.parseWallItemTypes(data.roomitemtypes.furnitype)
+
+    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
+      return console.error(error)
+    })
   }
 
   private parseRoomItemTypes(roomItems: IFurni[]): void {

@@ -1,3 +1,4 @@
+import { parseData } from '../tools/parseData'
 import type {
   IFigureData,
   IFigureDataColor,
@@ -6,13 +7,18 @@ import type {
   IFigureDataSetType,
   IXML
 } from '../types'
+import { Convertion } from '../config/Convertion'
 
 export class FigureData {
   public data: IFigureData = { palettes: [], setTypes: [] }
 
-  constructor(XML: IXML) {
+  constructor(XML: IXML, fileName: string) {
     this.parsePalettes(XML.figuredata.colors.palette)
     this.parseSetTypes(XML.figuredata.sets.settype)
+
+    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
+      return console.error(error)
+    })
   }
 
   private parsePalettes(palettes: any[]): void {
