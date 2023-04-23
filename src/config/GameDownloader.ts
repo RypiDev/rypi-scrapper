@@ -1,4 +1,4 @@
-import type { IDownloaderContent } from '../components'
+import type { IDownloaderContent } from '../components/layout/Downloaders/Downloader'
 
 export const GameDataDownloader: IDownloaderContent = {
   title: 'Converts and bundles:',
