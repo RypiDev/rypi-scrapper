@@ -24,23 +24,24 @@ await client
 
 export const GAME_ENDPOINTS = (domain: DomainTypes): GameEndPointsTypes => {
   return [
-    /* {
-      src: `${HABBO_URL(domain)}/gamedata/figuredata/0`, // check
+    {
+      src: `${HABBO_URL(domain)}/gamedata/figuredata/0`,
       convert: 'XML',
       fileName: 'FigureData'
-    }, */
-    /* {
+    },
+    {
       src: `${HABBO_GORDON_URL}/figuremap.xml`,
       convert: 'XML',
       fileName: 'FigureMap'
-    }, */
-    /* {
-      src: `${HABBO_URL(domain)}/gamedata/furnidata_json/0`, // check
-      fileName: 'FurniData'
-    }, */ {
+    },
+    {
       src: `${HABBO_GORDON_URL}/effectmap.xml`,
       convert: 'XML',
       fileName: 'EffectMap'
+    },
+    {
+      src: `${HABBO_URL(domain)}/gamedata/furnidata_json/0`,
+      fileName: 'FurniData'
     }
   ]
 }

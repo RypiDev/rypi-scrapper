@@ -2,7 +2,9 @@ import { downloadDir } from '@tauri-apps/api/path'
 
 import { PROD_VERSION } from './Endpoints'
 
-const gamedataDir = (await downloadDir()).concat(String(PROD_VERSION))
-const gamedataConfigDir = gamedataDir.concat('/config')
+const outputDir = (await downloadDir()).concat(String(PROD_VERSION))
 
-export const Convertion = { gamedataDir, gamedataConfigDir }
+const gamedataDir = outputDir.concat('/gamedata')
+const genericDir = outputDir.concat('/generic')
+
+export const Convertion = { outputDir, gamedataDir, genericDir }
