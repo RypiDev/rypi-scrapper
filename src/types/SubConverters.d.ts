@@ -1,3 +1,5 @@
+import type { KeyValuePairs } from './global'
+
 export interface IFurni {
   id: number
   classname: string
@@ -26,47 +28,43 @@ export interface IFurni {
   rare: boolean
 }
 
-export interface IFigureDataColor {
-  id: number
+export type Club = 'idle' | 'HC' | 'VIP'
+
+export interface IFigureDataPaletteType {
   index: number
-  club: number // must be changed to something, either 0, 1, 2
-  selectable: boolean // has been changed to boolean, can be either 1, 0
-  hexCode: string
+  club: number
+  selectable: boolean
+  color: string
 }
 
-export interface IFigureDataPalette {
-  id: number
-  color: IFigureDataColor[]
-}
+export type IFigureDataPalette = KeyValuePairs<number, IFigureDataPaletteType>
 
 export interface IFigureDataPart {
   id: number
-  type: string // must be changed (i guess)
-  colorable: boolean // has been changed to boolean, can be either 1, 0
+  type: string
+  colorable: boolean
   index: number
   colorindex: number
 }
 
 export interface IFigureDataSet {
-  id: number
-  gender: 'M' | 'F' | 'U' // has been changed
-  club: number // must be changed to something, either 0, 1, 2
-  colorable: boolean // has been changed to boolean, can be either 1, 0
-  selectable: boolean // has been changed to boolean, can be either 1, 0
-  preselectable: boolean // has been changed to boolean, can be either 1, 0
-  sellable?: boolean // has been changed to boolean, can be either 1, 0, null
+  gender: 'M' | 'F' | 'U'
+  club: number
+  colorable: boolean
+  selectable: boolean
+  preselectable: boolean
+  sellable?: boolean
+  hiddenLayers?: string[]
   parts: IFigureDataPart[]
-  hiddenLayers: Array<{ partType: string }> // !! can be empty
 }
 
 export interface IFigureDataSetType {
-  type: string // must be changed (i guess)
   paletteId: number
-  mandatoryF0: boolean // has been changed to boolean, can be either 1, 0
-  mandatoryF1: boolean // has been changed to boolean, can be either 1, 0
-  mandatoryM0: boolean // has been changed to boolean, can be either 1, 0
-  mandatoryM1: boolean // has been changed to boolean, can be either 1, 0
-  sets: IFigureDataSet[]
+  mandatoryF0: boolean
+  mandatoryF1: boolean
+  mandatoryM0: boolean
+  mandatoryM1: boolean
+  sets: KeyValuePairs<number, IFigureDataSet>
 }
 
 export interface IFigureMapLibraryPart {
@@ -76,14 +74,6 @@ export interface IFigureMapLibraryPart {
 
 export interface IFigureMapLibrary {
   id: string
-  revision: number
-  part: IFigureMapLibraryPart[]
-}
-
-export interface IEffectMapLibrary {
-  id: number
-  lib: string
-  type: string // dance || fx
   revision: number
 }
 
