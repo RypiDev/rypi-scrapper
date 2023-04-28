@@ -1,17 +1,14 @@
-import { parseData } from '../tools/parseData'
 import type { IFurni, IFurniData, IXML, KeyValuePairs } from '../types'
-import { Convertion } from '../config/Convertion'
 
 export class FurniData {
   public data: IFurniData = { roomItemTypes: [], wallItemTypes: [] }
+  public fileName: string
 
   constructor(data: IXML, fileName: string) {
+    this.fileName = fileName
+
     this.parseRoomItemTypes(data.roomitemtypes.furnitype)
     this.parseWallItemTypes(data.roomitemtypes.furnitype)
-
-    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
-      return console.error(error)
-    })
   }
 
   private parseRoomItemTypes(roomItems: IFurni[]): void {
@@ -33,8 +30,8 @@ export class FurniData {
     return { className, revision }
   }
 
-  public get classNamesAndRevisions(): KeyValuePairs {
-    const entries: KeyValuePairs = {}
+  public get classNamesAndRevisions(): KeyValuePairs<string, string> {
+    const entries: KeyValuePairs<string, string> = {}
 
     for (const roomItem of this.data.roomItemTypes) {
       const { className, revision } = this.getClassNameRevision(roomItem)

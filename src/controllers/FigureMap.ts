@@ -1,30 +1,25 @@
-import { Convertion } from '../config/Convertion'
-import { parseData } from '../tools/parseData'
 import type { IFigureMap, IFigureMapLibrary, IXML } from '../types'
 
 export class FigureMap {
-  public data: IFigureMap = { libraries: [] }
+  public data: IFigureMap = { libraries: [], parts: {} }
+  public fileName: string
 
   constructor(XML: IXML, fileName: string) {
-    this.parseLibrairies(XML.map.lib)
+    this.fileName = fileName
 
-    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
-      return console.error(error)
-    })
+    this.parseLibrairies(XML.map.lib)
   }
 
   private parseLibrairies(librairies: any[]): void {
     for (const libraryXML of librairies) {
-      const library: IFigureMapLibrary = { id: libraryXML.id, revision: Number(libraryXML.revision), part: [] }
+      const library: IFigureMapLibrary = { id: libraryXML.id, revision: Number(libraryXML.revision) }
 
       for (const libraryPart of Array.isArray(libraryXML.part) ? libraryXML.part : [libraryXML.part]) {
-        library.part.push({ id: Number(libraryPart.id), type: libraryPart.type })
+        this.data.parts[libraryPart.type] == null && (this.data.parts[libraryPart.type] = {})
+        this.data.parts[libraryPart.type][Number(libraryPart.id)] = librairies.indexOf(libraryXML)
       }
 
       this.data.libraries.push(library)
     }
   }
-
-  // maybe
-  /* public get classNamesAndRevisions(data: IFigureData): { [index: string]: string } {} */
 }

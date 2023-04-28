@@ -1,38 +1,27 @@
-import { parseData } from '../tools/parseData'
-import type {
-  IFigureData,
-  IFigureDataColor,
-  IFigureDataPalette,
-  IFigureDataSet,
-  IFigureDataSetType,
-  IXML
-} from '../types'
-import { Convertion } from '../config/Convertion'
+import type { IFigureData, IFigureDataPalette, IFigureDataSet, IFigureDataSetType, IXML } from '../types'
 
 export class FigureData {
-  public data: IFigureData = { palettes: [], setTypes: [] }
+  public data: IFigureData = { palettes: [], setTypes: {} }
+  public fileName: string
 
   constructor(XML: IXML, fileName: string) {
+    this.fileName = fileName
+
     this.parsePalettes(XML.figuredata.colors.palette)
     this.parseSetTypes(XML.figuredata.sets.settype)
-
-    parseData(Convertion.gamedataConfigDir, fileName, this.data).catch((error) => {
-      return console.error(error)
-    })
   }
 
   private parsePalettes(palettes: any[]): void {
     for (const paletteXML of palettes) {
-      const palette: IFigureDataPalette = { id: Number(paletteXML.id), color: [] }
+      const palette = {} as IFigureDataPalette
 
       for (const colorXML of paletteXML.color) {
-        palette.color.push({
-          id: Number(colorXML.id),
+        palette[Number(colorXML.id)] = {
           index: Number(colorXML.index),
           club: Number(colorXML.club),
           selectable: Boolean(colorXML.selectable),
-          hexCode: String(colorXML['#text' as keyof IFigureDataColor])
-        })
+          color: '#' + String(colorXML['#text'])
+        }
       }
 
       this.data.palettes.push(palette)
@@ -42,24 +31,22 @@ export class FigureData {
   private parseSetTypes(setTypes: any[]): void {
     for (const setTypeXML of setTypes) {
       const settype: IFigureDataSetType = {
-        type: setTypeXML.type,
         paletteId: Number(setTypeXML.paletteid),
-        mandatoryF0: Boolean(setTypeXML.mand_f_0),
-        mandatoryF1: Boolean(setTypeXML.mand_f_1),
-        mandatoryM0: Boolean(setTypeXML.mand_m_0),
-        mandatoryM1: Boolean(setTypeXML.mand_m_1),
-        sets: []
+        mandatoryF0: Boolean(Number(setTypeXML.mand_f_0)),
+        mandatoryF1: Boolean(Number(setTypeXML.mand_f_1)),
+        mandatoryM0: Boolean(Number(setTypeXML.mand_m_0)),
+        mandatoryM1: Boolean(Number(setTypeXML.mand_m_1)),
+        sets: {}
       }
 
       for (const setXML of setTypeXML.set) {
         const setType: IFigureDataSet = {
-          id: Number(setXML.id),
           gender: setXML.gender,
           club: Number(setXML.club),
-          colorable: Boolean(setXML.colorable),
-          selectable: Boolean(setXML.selectable),
-          preselectable: Boolean(setXML.preselectable),
-          sellable: Boolean(setXML.sellable),
+          colorable: Boolean(Number(setXML.colorable)),
+          selectable: Boolean(Number(setXML.selectable)),
+          preselectable: Boolean(Number(setXML.preselectable)),
+          sellable: setXML.sellable != null ? Boolean(Number(setXML.sellable)) : undefined,
           parts: [],
           hiddenLayers: []
         }
@@ -68,7 +55,7 @@ export class FigureData {
           setType.parts.push({
             id: Number(partXML.id),
             type: partXML.type,
-            colorable: Boolean(partXML.colorable),
+            colorable: Boolean(Number(partXML.colorable)),
             index: Number(partXML.index),
             colorindex: Number(partXML.colorindex)
           })
@@ -78,14 +65,14 @@ export class FigureData {
           for (const hiddenLayerXML of Array.isArray(setXML.hiddenLayers)
             ? setXML.hiddenLayers
             : [setXML.hiddenLayers]) {
-            setType.hiddenLayers.push({ partType: hiddenLayerXML.partType })
+            setType.hiddenLayers?.push(hiddenLayerXML.partType)
           }
         }
 
-        settype.sets.push(setType)
+        settype.sets[Number(setXML.id)] = setType
       }
 
-      this.data.setTypes.push(setTypeXML)
+      this.data.setTypes[String(setTypeXML.type)] = settype
     }
   }
 }
