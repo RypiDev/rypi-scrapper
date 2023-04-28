@@ -1,12 +1,21 @@
-import { createDir, exists, writeTextFile } from '@tauri-apps/api/fs'
+import { createDir, exists, writeFile } from '@tauri-apps/api/fs'
 
 import { Convertion } from '../config/Convertion'
 
-export const parseData = async (path: string, fileName: string, fileContent: string | object): Promise<void> => {
+export const parseData = async (
+  path: string,
+  fileName: string | undefined,
+  fileContent: string | object | undefined
+): Promise<void> => {
+  if (fileName == null || fileContent == null) return
+
   const fileDir = path.concat(`/${fileName}.json`)
 
-  if (!(await exists(Convertion.gamedataDir))) await createDir(Convertion.gamedataDir)
-  if (!(await exists(Convertion.gamedataConfigDir))) await createDir(Convertion.gamedataConfigDir)
+  // By default, output files will be overwritten, and I cannot recursively remove the entire output folder
+  // and create it again because it just won't parse files' contents for some reason
 
-  await writeTextFile(fileDir, typeof fileContent === 'object' ? JSON.stringify(fileContent) : fileContent)
+  if (!(await exists(Convertion.outputDir))) await createDir(Convertion.outputDir)
+  if (!(await exists(Convertion.gamedataDir))) await createDir(Convertion.gamedataDir)
+
+  return await writeFile(fileDir, typeof fileContent === 'object' ? JSON.stringify(fileContent) : fileContent)
 }

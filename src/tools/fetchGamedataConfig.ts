@@ -1,33 +1,44 @@
 import { XMLParser } from 'fast-xml-parser'
 
+import type { GameEndPointsTypes } from '../types'
 import { FigureMap } from '../controllers/FigureMap'
 import { EffectMap } from '../controllers/EffectMap'
-import type { GameEndPointsTypes } from '../types'
 import { convertTXT } from './convertTXT'
 import { FigureData } from '../controllers/FigureData'
 import { FurniData } from '../controllers/FurniData'
 import { Convertion } from '../config/Convertion'
+import { parseData } from './parseData'
 
 export const fetchGamedataConfig = async (data: string, endpoint: GameEndPointsTypes[number]): Promise<unknown> => {
   switch (endpoint.convert) {
     case 'XML':
       const convertedData = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' }).parse(data)
+      let parsedData: FigureData | FigureMap | EffectMap | undefined
 
       if (endpoint.fileName === 'FigureData') {
-        return new FigureData(convertedData, endpoint.fileName)
+        parsedData = new FigureData(convertedData, endpoint.fileName)
       } else if (endpoint.fileName === 'FigureMap') {
-        return new FigureMap(convertedData, endpoint.fileName)
+        parsedData = new FigureMap(convertedData, endpoint.fileName)
       } else if (endpoint.fileName === 'EffectMap') {
-        return new EffectMap(convertedData, endpoint.fileName)
+        parsedData = new EffectMap(convertedData, endpoint.fileName)
       }
 
-      break
+      return await parseData(Convertion.gamedataDir, parsedData?.fileName, parsedData?.data).catch((error) => {
+        return console.error(error)
+      })
     case 'TXT':
       return await convertTXT(Convertion.gamedataDir, data)
 
-    default:
+    default: {
+      let parsedData: FurniData | undefined
+
       if (endpoint.fileName === 'FurniData') {
-        return new FurniData(JSON.parse(data), endpoint.fileName)
+        parsedData = new FurniData(JSON.parse(data), endpoint.fileName)
       }
+
+      return await parseData(Convertion.gamedataDir, parsedData?.fileName, parsedData?.data).catch((error) => {
+        return console.error(error)
+      })
+    }
   }
 }

@@ -1,9 +1,9 @@
 import { ResponseType } from '@tauri-apps/api/http'
 
 import { GAME_ENDPOINTS, client } from '../config/Endpoints'
+import type { ConvertionHandler } from '../types'
 import type { DomainTypes } from '../types/Domain'
 import { fetchGamedataConfig } from './fetchGamedataConfig'
-import type { ConvertionHandler } from '../types/global'
 
 export const handleConvertion = async (
   domain: DomainTypes,
@@ -27,7 +27,7 @@ export const handleConvertion = async (
       })
     )
 
-    callback('Converting shockwave files...', 'loading')
+    // callback('Converting shockwave files...', 'loading')
 
     // fetch, read and convert the files from the production folder in the user downloads' folder
     // write the files into a seperate folder
