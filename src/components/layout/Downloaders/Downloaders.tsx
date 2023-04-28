@@ -1,4 +1,5 @@
 import { Fragment, useState } from 'react'
+import classNames from 'classnames'
 
 import { Image, Popup } from '../../system'
 import { Button } from '../Button'
@@ -6,10 +7,13 @@ import { GameAssetsDownloader, GameDataDownloader } from '../../../config/GameDo
 import { handleConvertion } from '../../../tools/handleConvertion'
 import { Downloader } from './Downloader'
 import type { ConvertionHandler } from '../../../types/global'
+import { Loader } from '../../design'
 
 export const Downloaders: React.FC = () => {
   const [message, setMessage] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+  const [popup, setPopup] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const callback: ConvertionHandler = (message, state = 'idle') => {
     switch (state) {
@@ -21,13 +25,47 @@ export const Downloaders: React.FC = () => {
         return setLoading(false)
       case 'error':
         setMessage(message)
+        setError(true)
         return setLoading(false)
     }
   }
 
+  const downloadGameData = async (): Promise<void> => {
+    setPopup(true)
+    setLoading(true)
+
+    const startTime = new Date()
+    await handleConvertion('com', callback)
+
+    const endTime = new Date()
+    const seconds = ((endTime.getTime() - startTime.getTime()) / 1000).toFixed(2)
+
+    return callback(`Completed in: ${seconds} seconds`, 'success')
+  }
+
   return (
     <Fragment>
-      <Popup condition={false}>xd</Popup>
+      <Popup condition={popup}>
+        <span
+          className={classNames('', {
+            'text-red-600': error
+          })}>
+          {message}
+        </span>
+
+        <Loader active={loading} className='mt-10' />
+
+        <Button
+          value='Close'
+          icon={<Image src='/icons/cross.png' />}
+          className={classNames('bg-red-600 mt-6 opacity-0 p-2 px-4 active:opacity-40 invisible text-white', {
+            '!opacity-100 !visible': !loading
+          })}
+          handler={() => {
+            return setPopup(!popup)
+          }}
+        />
+      </Popup>
 
       <ul className='flex gap-x-8'>
         <Downloader content={GameDataDownloader}>
@@ -37,9 +75,7 @@ export const Downloaders: React.FC = () => {
             value='Download Gamedata'
             icon={<Image src='/icons/game.png' size={22} />}
             className='download-button border-gamedata-secondary bg-gamedata-primary shadow-gamedata-primary/20'
-            handler={async () => {
-              return await handleConvertion('com', callback)
-            }}
+            handler={downloadGameData}
           />
         </Downloader>
 
