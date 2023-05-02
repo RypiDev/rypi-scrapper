@@ -28,26 +28,17 @@ export const Downloader: Component<DownloaderProps> = (props) => {
       {props.children}
 
       <AnimateView
-        condition={activeContent()}
         animation={Animation.fadeInOut()}
+        condition={activeContent()}
         class='pointer-events-none absolute left-0 top-0 flex h-full w-full flex-col items-center justify-center rounded-xl bg-black/70 pb-5 text-center text-[12px] text-white'>
-        <Motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          class='mb-3 text-[16px]'>
+        <Motion.h1 {...Animation.fadeInOut({ y: [-20, 0, -20] })} class='mb-3 text-[16px]'>
           {props.content.title}
         </Motion.h1>
 
         <For each={props.content.features}>
           {(feature) => {
             return (
-              <Motion.span
-                initial={{ opacity: 0, y: 50, scale: 0.75 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 50, scale: 0.75 }}>
-                {feature}
-              </Motion.span>
+              <Motion.span {...Animation.fadeInOut({ y: [50, 0, 50], scale: [0.75, 1, 0.75] })}>{feature}</Motion.span>
             )
           }}
         </For>

@@ -4,7 +4,7 @@ import classNames from 'classnames'
 
 import type { ConvertionHandler } from '../../../types'
 import { handleConvertion } from '../../../tools/handleConvertion'
-import { Animation, GameAssetsDownloader, GameDataDownloader } from '../../../config'
+import { GameAssetsDownloader, GameDataDownloader } from '../../../config'
 import { Button, Image, Loader } from '../../design'
 import { Popup } from '../Popup'
 import { Downloader } from './Downloader/Downloader'
@@ -45,9 +45,10 @@ export const Downloaders: Component = () => {
 
   return (
     <>
-      <Loader active={loading()} class='mt-10' />
       <Popup condition={popup()}>
         <span class={classNames('', { 'text-red-600': error })}>{message()}</span>
+
+        <Loader active={loading()} class='mt-10' />
 
         <Button
           value='Close'

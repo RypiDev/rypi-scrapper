@@ -1,19 +1,22 @@
-import { Show } from 'solid-js'
+import { Show, createEffect } from 'solid-js'
 import type { Component } from 'solid-js'
-import type { MotionComponentProps, Options as MotionProps } from '@motionone/solid'
+import type { MotionComponentProps, Variant } from '@motionone/solid'
 import { Motion, Presence } from '@motionone/solid'
 
 export interface AnimateViewProps extends MotionComponentProps {
+  animation: Record<string, Variant>
   condition: boolean
-  animation: MotionProps
   class?: string
 }
 
 export const AnimateView: Component<AnimateViewProps> = (props) => {
+  createEffect(() => {
+    console.log(props.condition)
+  })
   return (
     <Presence>
       <Show when={props.condition}>
-        <Motion.div {...props} initial={props.initial} animate={props.animate} exit={props.exit}>
+        <Motion.div class={props.class} {...props.animation}>
           {props.children}
         </Motion.div>
       </Show>

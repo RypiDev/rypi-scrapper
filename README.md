@@ -7,7 +7,7 @@
   - [ ] Using [Scuti](https://scuti.netlify.app/) dataset for its [renderer.](https://github.com/kozennnn/scuti-renderer)
 - [ ] Languages feature. (Default: EN)
 - [ ] Download Habbo assets. (>800 MB of disk memory, make sure the IPC handles it correctly)
-- [ ] Fix rendering animation issues.
+- [x] Fix rendering animation issues.
 - [ ] Add "abort" button with written data suppression feature.
 - [x] Convert front-end with SolidJS
 - [x] Fix issue of prettier-plugin-tailwindcss

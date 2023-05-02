@@ -1,6 +1,6 @@
-import type { Options, Variant } from '@motionone/solid'
+import type { Variant } from '@motionone/solid'
 
-const fadeInOut = (variant?: Variant): Options => {
+const fadeInOut = (variant?: Variant): Record<string, Variant> => {
   const getVariantAtPosition = (pos: 0 | 1 | 2): Record<string, number> | null => {
     if (variant == null) return null
 
@@ -16,7 +16,7 @@ const fadeInOut = (variant?: Variant): Options => {
   return {
     initial: { opacity: 0, ...getVariantAtPosition(0) },
     animate: { opacity: 1, ...getVariantAtPosition(1) },
-    exit: { opacity: 1, ...getVariantAtPosition(2) }
+    exit: { opacity: 0, ...getVariantAtPosition(2) }
   }
 }
 

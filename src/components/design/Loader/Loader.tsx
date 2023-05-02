@@ -13,7 +13,7 @@ export const Loader: Component<LoaderProps> = (props) => {
     <AnimateView
       class={props.class}
       condition={props.active}
-      animation={Animation.fadeInOut({ scale: [0, 1, 0], y: [1, 4, 1] })}>
+      variants={Animation.fadeInOut({ scale: [0, 1, 0], y: [1, 4, 1] })}>
       <svg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg' stroke='#fff'>
         <g fill='none' fill-rule='evenodd' stroke-width={2}>
           <circle cx='22' cy='22' r='1'>
