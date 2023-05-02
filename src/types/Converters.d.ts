@@ -1,4 +1,11 @@
-import type { IFigureDataPalette, IFigureDataSetType, IFigureMapLibrary, IFurni, IProduct } from './SubConverters'
+import type {
+  IFigureDataPalette,
+  IFigureDataSetType,
+  IFigureMapLibrary,
+  IFloorItem,
+  IFurni,
+  IProduct
+} from './SubConverters'
 import type { KeyValuePairs } from './global'
 
 export interface IFigureData {
@@ -12,8 +19,8 @@ export interface IFigureMap {
 }
 
 export interface IFurniData {
-  roomItemTypes: IFurni[]
-  wallItemTypes: IFurni[]
+  floorItems: IFloorItem[]
+  wallItems: IFurni[]
 }
 
 export type IEffectMap = KeyValuePairs<string, KeyValuePairs<string, string>>

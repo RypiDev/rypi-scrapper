@@ -5,22 +5,33 @@ export const useOutSideClickEventHandler = (callback: () => void): RefObject<HTM
   const wrapper = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const handleClickOutside = (event: KeyboardEvent): void => {
-      if (Boolean(wrapper.current?.contains(event.target as Node))) return
-      if (event.key !== 'Escape') return
+    const handleClickOutside = (event: KeyboardEvent | MouseEvent): void => {
+      const currentEvent = event as KeyboardEvent
+
+      if (
+        wrapper.current == null ||
+        Boolean(wrapper.current.contains(currentEvent.target as Node)) ||
+        currentEvent.key !== 'Escape'
+      )
+        return
+
       return callback()
     }
 
-    window.addEventListener('click', (event: any) => {
+    window.addEventListener('click', (event) => {
       return handleClickOutside(event)
     })
 
-    window.addEventListener('keydown', (event: any) => {
+    window.addEventListener('keydown', (event) => {
       return handleClickOutside(event)
     })
 
     return () => {
-      return window.removeEventListener('click', (event: any) => {
+      window.removeEventListener('click', (event) => {
+        return handleClickOutside(event)
+      })
+
+      window.removeEventListener('keydown', (event) => {
         return handleClickOutside(event)
       })
     }

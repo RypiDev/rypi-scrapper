@@ -1,31 +1,33 @@
 import type { KeyValuePairs } from './global'
 
+export interface IFloorItemDimensions {
+  x: number
+  y: number
+  defaultDirection: number
+}
+
+export interface IFloorItemPermissions {
+  canSitOn: boolean
+  canLayOn: boolean
+  canStandOn: boolean
+}
+
+export interface IFloorItem extends IFurni {
+  dimensions: IFloorItemDimensions
+  permissions: IFloorItemPermissions
+}
+
 export interface IFurni {
   id: number
   classname: string
-  revision: number
-  category?: string
-  defaultdir: number
-  xdim: number
-  ydim: number
-  partcolors?: { color: string[] }
-  name?: string
   description?: string
+  name?: string
+  furniLine?: string
+  customParams?: string
   adurl?: string
-  offerid?: number
-  buyout: boolean
-  rentofferid: number
-  rentbuyout: boolean
-  bc: boolean
-  excludeddynamic: boolean
-  customparams?: string
-  specialtype: number
-  canstandon: boolean
-  cansiton: boolean
-  canlayon: boolean
-  furniline?: string
-  environment?: string
-  rare: boolean
+  offerID?: number
+  excludeDynamic: boolean
+  specialType: number
 }
 
 export type Club = 'idle' | 'HC' | 'VIP'

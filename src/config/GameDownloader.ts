@@ -1,11 +1,9 @@
-import type { IDownloaderContent } from '../components/layout/Downloaders/Downloader'
-
-export const GameDataDownloader: IDownloaderContent = {
+export const GameDataDownloader = {
   title: 'Converts and bundles:',
-  features: ['XML/TXT to minified JSON files', 'Converts SWF files to Parquet']
+  features: ['XML/TXT to minified JSON files', 'Converts SWF files to Sprite']
 }
 
-export const GameAssetsDownloader: IDownloaderContent = {
+export const GameAssetsDownloader = {
   title: 'Fetches PNG/JPEG:',
   features: [
     'Badges + Badgeparts',

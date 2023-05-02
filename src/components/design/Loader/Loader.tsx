@@ -1,21 +1,21 @@
-import type { HTMLMotionProps } from 'framer-motion'
+import type { Component } from 'solid-js'
 
-import { AnimateView } from '../../system'
+import { Animation } from '../../../config'
+import { AnimateView } from '../AnimateView'
 
-interface LoaderProps extends HTMLMotionProps<'main'> {
+interface LoaderProps {
+  class?: string
   active: boolean
 }
 
-export const Loader: React.FC<LoaderProps> = ({ active, ...rest }) => {
+export const Loader: Component<LoaderProps> = (props) => {
   return (
     <AnimateView
-      condition={active}
-      initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0 }}
-      {...rest}>
+      class={props.class}
+      condition={props.active}
+      animation={Animation.fadeInOut({ scale: [0, 1, 0], y: [1, 4, 1] })}>
       <svg width='44' height='44' viewBox='0 0 44 44' xmlns='http://www.w3.org/2000/svg' stroke='#fff'>
-        <g fill='none' fillRule='evenodd' strokeWidth={2}>
+        <g fill='none' fill-rule='evenodd' stroke-width={2}>
           <circle cx='22' cy='22' r='1'>
             <animate
               attributeName='r'

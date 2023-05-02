@@ -1,6 +1,3 @@
-import { XMLParser } from 'fast-xml-parser'
-
-import type { GameEndPointsTypes } from '../types'
 import { FigureMap } from '../controllers/FigureMap'
 import { EffectMap } from '../controllers/EffectMap'
 import { convertTXT } from './convertTXT'
@@ -9,18 +6,18 @@ import { FurniData } from '../controllers/FurniData'
 import { Convertion } from '../config/Convertion'
 import { parseData } from './parseData'
 
-export const fetchGamedataConfig = async (data: string, endpoint: GameEndPointsTypes[number]): Promise<unknown> => {
+export const fetchGamedataConfig = async (data: string, endpoint: GamedataEndpoints): Promise<unknown> => {
   switch (endpoint.convert) {
     case 'XML':
       const convertedData = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '' }).parse(data)
       let parsedData: FigureData | FigureMap | EffectMap | undefined
 
-      if (endpoint.fileName === 'FigureData') {
-        parsedData = new FigureData(convertedData, endpoint.fileName)
-      } else if (endpoint.fileName === 'FigureMap') {
-        parsedData = new FigureMap(convertedData, endpoint.fileName)
-      } else if (endpoint.fileName === 'EffectMap') {
-        parsedData = new EffectMap(convertedData, endpoint.fileName)
+      if (endpoint.file_name === 'FigureData') {
+        parsedData = new FigureData(convertedData, endpoint.file_name)
+      } else if (endpoint.file_name === 'FigureMap') {
+        parsedData = new FigureMap(convertedData, endpoint.file_name)
+      } else if (endpoint.file_name === 'EffectMap') {
+        parsedData = new EffectMap(convertedData, endpoint.file_name)
       }
 
       return await parseData(Convertion.gamedataDir, parsedData?.fileName, parsedData?.data).catch((error) => {
@@ -32,8 +29,8 @@ export const fetchGamedataConfig = async (data: string, endpoint: GameEndPointsT
     default: {
       let parsedData: FurniData | undefined
 
-      if (endpoint.fileName === 'FurniData') {
-        parsedData = new FurniData(JSON.parse(data), endpoint.fileName)
+      if (endpoint.file_name === 'FurniData') {
+        parsedData = new FurniData(JSON.parse(data), endpoint.file_name)
       }
 
       return await parseData(Convertion.gamedataDir, parsedData?.fileName, parsedData?.data).catch((error) => {

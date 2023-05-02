@@ -1,13 +1,18 @@
-import { Window } from './components/system'
-import { Downloaders } from './components/layout'
+import type { Component } from 'solid-js'
 
-const Main: React.FC = () => {
+import { Downloaders, TitleBar } from './components/layout'
+
+const Main: Component = () => {
   return (
-    <Window>
-      <span className='mb-20 text-white'>I would like to:</span>
+    <>
+      <TitleBar />
 
-      <Downloaders />
-    </Window>
+      <main class='relative flex h-full w-screen flex-col items-center justify-center bg-[#242424] py-20'>
+        <span class='mb-20 text-white'>I would like to:</span>
+
+        <Downloaders />
+      </main>
+    </>
   )
 }
 

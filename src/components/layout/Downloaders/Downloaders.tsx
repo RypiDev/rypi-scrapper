@@ -1,19 +1,19 @@
-import { Fragment, useState } from 'react'
+import type { Component } from 'solid-js'
+import { createSignal } from 'solid-js'
 import classNames from 'classnames'
 
-import { Image, Popup } from '../../system'
-import { Button } from '../Button'
-import { GameAssetsDownloader, GameDataDownloader } from '../../../config/GameDownloader'
+import type { ConvertionHandler } from '../../../types'
 import { handleConvertion } from '../../../tools/handleConvertion'
-import { Downloader } from './Downloader'
-import type { ConvertionHandler } from '../../../types/global'
-import { Loader } from '../../design'
+import { Animation, GameAssetsDownloader, GameDataDownloader } from '../../../config'
+import { Button, Image, Loader } from '../../design'
+import { Popup } from '../Popup'
+import { Downloader } from './Downloader/Downloader'
 
-export const Downloaders: React.FC = () => {
-  const [message, setMessage] = useState('')
-  const [error, setError] = useState(false)
-  const [popup, setPopup] = useState(false)
-  const [loading, setLoading] = useState(true)
+export const Downloaders: Component = () => {
+  const [message, setMessage] = createSignal('')
+  const [error, setError] = createSignal(false)
+  const [popup, setPopup] = createSignal(false)
+  const [loading, setLoading] = createSignal(false)
 
   const callback: ConvertionHandler = (message, state = 'idle') => {
     switch (state) {
@@ -43,38 +43,39 @@ export const Downloaders: React.FC = () => {
     return callback(`Completed in: ${seconds} seconds`, 'success')
   }
 
+  console.log(Animation.fadeInOut({ scale: [0, 1, 0], y: [1, 4, 1] }))
+
   return (
-    <Fragment>
-      <Popup condition={popup}>
+    <>
+      <Loader active={loading()} class='mt-10' />
+      <Popup condition={popup()}>
         <span
-          className={classNames('', {
+          class={classNames('', {
             'text-red-600': error
           })}>
-          {message}
+          {message()}
         </span>
-
-        <Loader active={loading} className='mt-10' />
 
         <Button
           value='Close'
           icon={<Image src='/icons/cross.png' />}
-          className={classNames('bg-red-600 mt-6 opacity-0 p-2 px-4 active:opacity-40 invisible text-white', {
-            '!opacity-100 !visible': !loading
+          class={classNames('invisible mt-6 bg-red-600 p-2 px-4 text-white opacity-0 active:opacity-40', {
+            '!visible !opacity-100': !loading()
           })}
           handler={() => {
-            return setPopup(!popup)
+            return setPopup(!popup())
           }}
         />
       </Popup>
 
-      <ul className='flex gap-x-8'>
+      <ul class='flex gap-x-8'>
         <Downloader content={GameDataDownloader}>
           <Image src='/images/Gamedata.png' />
 
           <Button
             value='Download Gamedata'
             icon={<Image src='/icons/game.png' size={22} />}
-            className='download-button border-gamedata-secondary bg-gamedata-primary shadow-gamedata-primary/20'
+            class='download-button border-gamedata-secondary bg-gamedata-primary shadow-gamedata-primary/20'
             handler={downloadGameData}
           />
         </Downloader>
@@ -84,11 +85,11 @@ export const Downloaders: React.FC = () => {
 
           <Button
             value='Download GameAssets'
-            icon={<Image src='/icons/picture.png' icon />}
-            className='download-button border-gameAssets-secondary bg-gameAssets-primary shadow-gameAssets-primary/40'
+            icon={<Image src='/icons/picture.png' pixelated />}
+            class='download-button border-gameAssets-secondary bg-gameAssets-primary shadow-gameAssets-primary/40'
           />
         </Downloader>
       </ul>
-    </Fragment>
+    </>
   )
 }

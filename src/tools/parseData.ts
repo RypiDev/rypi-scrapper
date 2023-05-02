@@ -11,11 +11,10 @@ export const parseData = async (
 
   const fileDir = path.concat(`/${fileName}.json`)
 
-  // By default, output files will be overwritten, and I cannot recursively remove the entire output folder
+  // By default, output files will be overwritten. I cannot recursively remove the entire output folder
   // and create it again because it just won't parse files' contents for some reason
 
-  if (!(await exists(Convertion.outputDir))) await createDir(Convertion.outputDir)
-  if (!(await exists(Convertion.gamedataDir))) await createDir(Convertion.gamedataDir)
+  if (!(await exists(Convertion.gamedataDir))) await createDir(Convertion.gamedataDir, { recursive: true })
 
   return await writeFile(fileDir, typeof fileContent === 'object' ? JSON.stringify(fileContent) : fileContent)
 }
