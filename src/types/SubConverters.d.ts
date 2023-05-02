@@ -1,5 +1,3 @@
-import type { KeyValuePairs } from './global'
-
 export interface IFloorItemDimensions {
   x: number
   y: number
@@ -39,7 +37,7 @@ export interface IFigureDataPaletteType {
   color: string
 }
 
-export type IFigureDataPalette = KeyValuePairs<number, IFigureDataPaletteType>
+export type IFigureDataPalette = Record<number, IFigureDataPaletteType>
 
 export interface IFigureDataPart {
   id: number
@@ -66,7 +64,7 @@ export interface IFigureDataSetType {
   mandatoryF1: boolean
   mandatoryM0: boolean
   mandatoryM1: boolean
-  sets: KeyValuePairs<number, IFigureDataSet>
+  sets: Record<number, IFigureDataSet>
 }
 
 export interface IFigureMapLibraryPart {

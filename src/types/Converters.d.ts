@@ -6,16 +6,15 @@ import type {
   IFurni,
   IProduct
 } from './SubConverters'
-import type { KeyValuePairs } from './global'
 
 export interface IFigureData {
   palettes: IFigureDataPalette[]
-  setTypes: KeyValuePairs<string, IFigureDataSetType>
+  setTypes: Record<string, IFigureDataSetType>
 }
 
 export interface IFigureMap {
   libraries: IFigureMapLibrary[]
-  parts: KeyValuePairs<string, KeyValuePairs<number, number>>
+  parts: Record<string, Record<number, number>>
 }
 
 export interface IFurniData {
@@ -23,7 +22,7 @@ export interface IFurniData {
   wallItems: IFurni[]
 }
 
-export type IEffectMap = KeyValuePairs<string, KeyValuePairs<string, string>>
+export type IEffectMap = Record<string, Record<string, string>>
 
 export interface IProductData {
   productData: { product: IProduct }

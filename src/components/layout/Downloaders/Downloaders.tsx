@@ -43,18 +43,11 @@ export const Downloaders: Component = () => {
     return callback(`Completed in: ${seconds} seconds`, 'success')
   }
 
-  console.log(Animation.fadeInOut({ scale: [0, 1, 0], y: [1, 4, 1] }))
-
   return (
     <>
       <Loader active={loading()} class='mt-10' />
       <Popup condition={popup()}>
-        <span
-          class={classNames('', {
-            'text-red-600': error
-          })}>
-          {message()}
-        </span>
+        <span class={classNames('', { 'text-red-600': error })}>{message()}</span>
 
         <Button
           value='Close'
