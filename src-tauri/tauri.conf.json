@@ -1,11 +1,5 @@
 {
-  "build": {
-    "beforeDevCommand": "yarn dev",
-    "beforeBuildCommand": "yarn build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
-  },
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "package": {
     "productName": "rypi-scrapper",
     "version": "0.0.0"
@@ -44,7 +38,7 @@
       "targets": "all"
     },
     "security": {
-      "csp": null
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     },
     "updater": {
       "active": false
