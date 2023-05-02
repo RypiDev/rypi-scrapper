@@ -1,11 +1,13 @@
 [package]
-name = "rypi-scrapper"
+name = "app"
 version = "0.0.0"
 description = "Scrapping Habbo gamedata and assets"
-authors = ["you"]
-license = ""
-repository = ""
+authors = ["Walidoux"]
+license = "MIT"
+repository = "https://github.com/RypiDev/rypi-scrapper"
+default-run = "app"
 edition = "2021"
+build = "src/build.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -14,10 +16,19 @@ tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
 tauri = { version = "1.2", features = ["fs-create-dir", "fs-exists", "fs-read-dir", "fs-remove-dir", "fs-write-file", "http-all", "path-all", "window-close", "window-minimize", "window-start-dragging"] }
+tauri-specta = { version = "1.0.0", features = ["typescript"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+specta = "1.0.3"
+quickxml_to_serde = "0.5.0"
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
-# DO NOT REMOVE!!
 custom-protocol = ["tauri/custom-protocol"]
+
+[profile.release]
+strip = true            # Automatically strip symbols from the binary
+panic = "abort"         # Strip expensive panic clean-up logic
+codegen-units = 1       # Compile crates one after another so the compiler can optimize better
+lto = true              # Enables link to optimizations
+opt-level = "s"         # Optimize for binary size
