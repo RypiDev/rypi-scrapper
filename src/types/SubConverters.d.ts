@@ -1,33 +1,3 @@
-export interface IFloorItemDimensions {
-  x: number
-  y: number
-  defaultDirection: number
-}
-
-export interface IFloorItemPermissions {
-  canSitOn: boolean
-  canLayOn: boolean
-  canStandOn: boolean
-}
-
-export interface IFloorItem extends IFurni {
-  dimensions: IFloorItemDimensions
-  permissions: IFloorItemPermissions
-}
-
-export interface IFurni {
-  id: number
-  classname: string
-  description?: string
-  name?: string
-  furniLine?: string
-  customParams?: string
-  adurl?: string
-  offerID?: number
-  excludeDynamic: boolean
-  specialType: number
-}
-
 export type Club = 'idle' | 'HC' | 'VIP'
 
 export interface IFigureDataPaletteType {

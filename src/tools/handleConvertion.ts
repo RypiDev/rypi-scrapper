@@ -2,13 +2,12 @@ import { ResponseType } from '@tauri-apps/api/http'
 
 import { GAMEDATA_ENDPOINTS, client } from '../config/Endpoints'
 import type { ConvertionHandler } from '../types'
-import type { DomainTypes } from '../config/Domain'
 import { parseData } from './parseData'
 import { Convertion } from '../config/Convertion'
 import { downloadGamedata } from './rusty'
 
 export const handleConvertion = async (
-  domain: DomainTypes,
+  domain: string,
   callback: ConvertionHandler,
   assetsOption = false
 ): Promise<void> => {

@@ -1,11 +1,4 @@
-import type {
-  IFigureDataPalette,
-  IFigureDataSetType,
-  IFigureMapLibrary,
-  IFloorItem,
-  IFurni,
-  IProduct
-} from './SubConverters'
+import type { IFigureDataPalette, IFigureDataSetType, IFigureMapLibrary, IProduct } from './SubConverters'
 
 export interface IFigureData {
   palettes: IFigureDataPalette[]
@@ -15,11 +8,6 @@ export interface IFigureData {
 export interface IFigureMap {
   libraries: IFigureMapLibrary[]
   parts: Record<string, Record<number, number>>
-}
-
-export interface IFurniData {
-  floorItems: IFloorItem[]
-  wallItems: IFurni[]
 }
 
 export type IEffectMap = Record<string, Record<string, string>>
