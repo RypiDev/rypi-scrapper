@@ -1,0 +1,13 @@
+@font-face {
+  font-family: 'Press Start 2P';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url('./PressStart2P-Regular.ttf');
+}
+
+#root {
+  font-family: 'Press Start 2P';
+  overflow: hidden;
+  height: 100vh;
+}
