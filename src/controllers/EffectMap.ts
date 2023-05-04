@@ -1,10 +1,10 @@
-import type { IEffectMap, IXML } from '../types'
+import type { IEffectMap } from '../types'
 
 export class EffectMap {
   public data: IEffectMap = {}
   public fileName: string
 
-  constructor(XML: IXML, fileName: string) {
+  constructor(XML: any, fileName: string) {
     this.fileName = fileName
 
     this.parseLibrairies(XML.map.effect)

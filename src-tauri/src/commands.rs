@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+
 use quickxml_to_serde::{xml_string_to_json, Config, NullValue};
 use specta::specta;
 
@@ -22,25 +24,27 @@ pub fn download_gamedata(data: &str, endpoint: GamedataEndpoints) {
     }
 }
 
-/* #[specta]
+#[specta]
 #[tauri::command]
 pub fn parse_data(
-    path: String,
-    file_name: String,
-    file_content: String,
+    path: &str,
+    file_name: &str,
+    file_content: &str,
 ) -> Result<(), Box<dyn std::error::Error>> {
     let file_dir = PathBuf::from(&path).join(format!("{}.json", file_name));
 
+    println!("{:?}", file_dir);
+
     // By default, output files will be overwritten. I cannot recursively remove the entire output folder
     // and create it again because it just won't parse files' contents for some reason
-    if !exists(&Convertion::gamedata_dir()) {
+    /* if !exists(&Convertion::gamedata_dir()) {
         create_dir_all(&Convertion::gamedata_dir())?;
     }
 
-    write_file(&file_dir, file_content.as_bytes());
+    write_file(&file_dir, file_content.as_bytes()); */
 
     Ok(())
-} */
+}
 
 /* pub async fn convert_txt(path: &str, data: &str) -> Result<(), Box<dyn std::error::Error>> {
     let mut badges: Vec<Badge> = Vec::new();

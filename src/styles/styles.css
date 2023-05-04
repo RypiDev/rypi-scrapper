@@ -16,6 +16,6 @@
 
 @layer components {
   .download-button {
-    @apply retro-text-shadow center-x-axis center-x-axis -bottom-4 z-10 h-12 w-10/12 border-2 text-xs text-white shadow-2xl transition-all hover:-translate-x-1/2 hover:scale-105 hover:duration-200 active:-translate-x-1/2 active:scale-95 active:opacity-80 active:shadow-none active:duration-75;
+    @apply retro-text-shadow center-x-axis center-x-axis -bottom-4 z-10 h-12 w-10/12 border-2 text-xs shadow-2xl transition-all hover:-translate-x-1/2 hover:scale-105 hover:duration-200 active:-translate-x-1/2 active:scale-95 active:opacity-80 active:shadow-none active:duration-75;
   }
 }

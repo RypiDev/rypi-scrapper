@@ -51,9 +51,16 @@ export const Downloaders: Component = () => {
         <Loader active={loading()} class='mt-10' />
 
         <Button
+          value='Abort'
+          icon={<Image src='/icons/cross.png' />}
+          class='mt-6 bg-red-600 p-2 px-4 active:opacity-40'
+          handler={() => {}}
+        />
+
+        <Button
           value='Close'
           icon={<Image src='/icons/cross.png' />}
-          class={classNames('invisible mt-6 bg-red-600 p-2 px-4 text-white opacity-0 active:opacity-40', {
+          class={classNames('invisible mt-6 bg-red-600 p-2 px-4 opacity-0 active:opacity-40', {
             '!visible !opacity-100': !loading()
           })}
           handler={() => {
